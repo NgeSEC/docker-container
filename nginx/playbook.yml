@@ -1,0 +1,21 @@
+---
+- name: Restart service
+  hosts: localhost
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+    - name: Check if nginx service exists
+      stat: path=/etc/init.d/nginx
+      register: nginx_service
+
+    - name: restart nginx service
+      raw: sudo service nginx restart
+      when: nginx_service.stat.exists == True 
+    
+    - name: restart apache2 service
+      raw: sudo service apache2 restart
+      when: nginx_service.stat.exists == False
