@@ -1,7 +1,3 @@
-#
-# Nginx Dockerfile
-# 
-
 FROM ubuntu:16.04
 
 RUN apt-get update && \
@@ -13,6 +9,6 @@ RUN apt-get update && \
 
 WORKDIR /etc/nginx
 
-EXPOSE 80
+EXPOSE 443
 
 CMD ["nginx"]
